@@ -1,0 +1,30 @@
+#dice {
+	text-align: center;
+	font-size: 120px;
+}
+#settings {
+	float:left;
+	flex-basis: 100px;
+	flex-grow: 0;
+	flex-shrink: 0;
+	height:100%;
+	background-color: #F00;
+}
+#quizpane {
+	flex: 0 0 100%;
+	background-color: #0FF;
+}
+#mainView {
+	display: flex;
+/*	flex-direction: row;*/
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+}
+#quizQuestion{
+	text-align: center;
+}
+#answerBox{
+	margin: auto;
+	display: block;
+}

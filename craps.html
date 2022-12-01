@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="mainStyle.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script src="crapsmain.js"></script>
+	</head>
+	
+	<body onload="initPage()">
+		<div id="mainView">
+			<div id="settings">
+				<button onclick="roll()">Reroll</button></br>
+				<form>
+					<label for="centermin">Center action Minimum</label>
+					<input type="number" id="caMin" name="quantity" min="1" max="5">
+					<label for="centermin">Center action Maximum</label>
+					<input type="number" id="caMax" name="quantity" min="5" max="500">
+					<label for="centermin">Place bet/Come bet Minimum</label>
+					<input type="number" id="pbMin" name="quantity" min="5" max="500">
+					<label for="centermin">Place bet/Come bet Maximum</label>
+					<input type="number" id="pbMax" name="quantity" min="6" max="500">
+					<input type="checkbox" id="includePoints" name="pointNums" value="pointNums">
+					<label for="includePoints">Include point numbers</label><br>
+					<input type="checkbox" id="includeCraps" name="craps" value="pointNums">
+					<label for="includeCraps">Include craps</label><br>
+					<input type="checkbox" id="includeSevens" name="craps" value="pointNums">
+					<label for="includeSevens">Include sevens</label><br>
+				</form>
+			</div>
+			<div id="quizpane">
+				<p id="dice"></p>
+				<p id="quizQuestion">Question here.</p>
+				<input type="number" id="answerBox" onkeypress="tryAnswer(event)"></input>
+			</div>
+	</div>
+	</body>
+</html>
