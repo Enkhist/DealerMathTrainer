@@ -125,12 +125,39 @@ function horn(roll){
 	bet = randUnit(settings['caMin'], settings['caMax'], 4);
 	if(roll==2||roll==12){
 		payout = Math.floor(bet/4)*27;
-	}
+	}	
 	else if(roll==3||roll==11){
 		payout = bet*3
 	}
-	setQA("Horn placeBet payout for "+bet, payout);
+	setQA("Horn payout for "+bet, payout);
 }
+function hornHigh(roll){
+	var highs={
+		2:"Aces",
+		3:"Ace-Deuce",
+		11:"Yo",
+		12:"Twelve"}
+	var hhlist = [2,3,11,12];
+
+	bet = randUnit(settings['caMin'], settings['caMax'], 5);
+	selectedHornHigh = hhlist[Math.floor(Math.random()*hhlist.length)];
+
+	if(roll == 11|roll == 3){
+		if(roll == selectedHornHigh){
+			payout = Math.floor(bet/5)*27;
+		} else {
+			payout = Math.floor(bet/5)*11;
+		}
+	} else if(roll == 12|roll == 2){
+		if(roll == selectedHornHigh){
+			payout = Math.floor(bet/5)*57;
+		} else {
+			payout = Math.floor(bet/5)*26;
+		}
+	}
+	setQA("Horn High "+highs[selectedHornHigh]+" payout for "+bet, payout);
+}
+
 function anyseven(roll){
 	bet = randUnit(settings['caMin'], settings['caMax'], 1);
 	payout = bet*4
@@ -138,8 +165,8 @@ function anyseven(roll){
 
 }
 var funcs = [
-	[ceScenario, horn],//2
-	[ceScenario, horn],//3
+	[ceScenario, horn, hornHigh],//2
+	[ceScenario, horn, hornHigh],//3
 	[placeBet],//4
 	[placeBet],//5
 	[placeBet],//6
@@ -147,8 +174,8 @@ var funcs = [
 	[placeBet],//8
 	[placeBet],//9
 	[placeBet],//10
-	[ceScenario, horn],//11,
-	[ceScenario, horn]//12];
+	[ceScenario, horn, hornHigh],//11,
+	[ceScenario, horn, hornHigh]//12];
 ]
 function roll() {
 	readSettings();
