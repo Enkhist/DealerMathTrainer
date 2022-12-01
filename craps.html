@@ -8,7 +8,8 @@
 	<body onload="initPage()">
 		<div id="mainView">
 			<div id="settings">
-				<button onclick="roll()">Reroll</button></br>
+				<button onclick="roll()">Reroll</button>
+				<button onclick="cheat()">Cheat</button></br>
 				<form>
 					<label for="centermin">Center action Minimum</label>
 					<input type="number" id="caMin" name="quantity" min="1" max="5">
@@ -30,6 +31,7 @@
 				<p id="dice"></p>
 				<p id="quizQuestion">Question here.</p>
 				<input type="text" id="answerBox" onkeypress="tryAnswer(event)"></input>
+				<p id="cheat"></p>
 			</div>
 	</div>
 	</body>

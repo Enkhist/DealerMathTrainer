@@ -21,7 +21,7 @@
 	width: 100%;
 	padding: 0px;
 }
-#quizQuestion{
+#quizQuestion, #cheat{
 	text-align: center;
 }
 #answerBox{

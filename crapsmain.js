@@ -34,7 +34,9 @@ class Dice{
 		}
 	}
 	get isHard(){
-		if(this.isHard){
+		if(this.die1 == this.die2 && this.isPointNum){
+			return true;
+		} else {
 			return false;
 		}
 
@@ -70,6 +72,7 @@ function setQA(q, a){
 	question = q;
 	answer = a;
 	document.getElementById("quizQuestion").innerHTML = question;
+	document.getElementById("cheat").innerHTML="";
 	
 }
 /*
@@ -157,16 +160,85 @@ function hornHigh(roll){
 	}
 	setQA("Horn High "+highs[selectedHornHigh]+" payout for "+bet, payout);
 }
-
+function hardway(roll){
+	bet = randUnit(settings['caMin'], settings['caMax'], 1);
+	if(roll == 6|roll == 8)
+	{
+		payout = bet*9
+	} else if(roll == 4|roll == 10){
+		payout = bet * 7
+	}
+	setQA("Hard "+roll+" payout for "+bet, payout);
+}
 function anyseven(roll){
 	bet = randUnit(settings['caMin'], settings['caMax'], 1);
 	payout = bet*4
-	setQA("Any seven for "+bet, payout);;
+	setQA("Any seven for "+bet, payout);
 
 }
+
+function highLowYo(roll){
+	bet = randUnit(settings['caMin'], settings['caMax'], 3);
+	if(roll == 12||roll == 2){
+		payout = Math.floor(bet/3)*28;
+	} else if(roll == 11){
+		payout = Math.floor(bet/3)*13;
+	}
+	setQA("High Low Yo for "+bet, payout);
+}
+
+function highLow(roll){
+	bet = randUnit(settings['caMin'], settings['caMax'], 2);
+	if(roll == 12||roll == 2){
+		payout = Math.floor(bet/2)*29;
+	} else if(roll == 11){
+		payout = Math.floor(bet/2)*14;
+	}
+	setQA("High Low for "+bet, payout);
+}
+
+//catch all function for the individual red hops
+function redHops(roll){
+	var reds={
+		2:"Aces",
+		3:"Ace-Deuce",
+		11:"Yo",
+		12:"Twelve"}
+	bet = randUnit(settings['caMin'], settings['caMax'], 1);
+	if(roll == 2||roll == 12){
+		payout = bet*30;
+	}
+	else if (roll == 3||roll==11){
+		payout = bet*15;
+	}
+	setQA(reds[roll]+" for "+bet, payout);
+
+}
+
+function crapcheck(roll)
+{
+	bet = randUnit(settings['caMin'], settings['caMax'], 1);
+	if(roll == 2|roll == 3| roll == 12){
+		payout = bet * 4
+	}
+	setQA("Any craps for "+bet, payout);
+}
+
+/*
+function hops(roll)
+{
+	bet = randUnit(settings['caMin'], settings['caMax'], 1);
+	if(dice.isHard){
+		payout = bet*30;
+	} else {
+		payout = bet*15;
+	}
+	setQA("[this exact hop] for "+bet, payout);
+}
+*/
 var funcs = [
-	[ceScenario, horn, hornHigh],//2
-	[ceScenario, horn, hornHigh],//3
+	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow],//2
+	[ceScenario, horn, hornHigh, redHops, crapcheck],//3
 	[placeBet],//4
 	[placeBet],//5
 	[placeBet],//6
@@ -174,8 +246,8 @@ var funcs = [
 	[placeBet],//8
 	[placeBet],//9
 	[placeBet],//10
-	[ceScenario, horn, hornHigh],//11,
-	[ceScenario, horn, hornHigh]//12];
+	[ceScenario, horn, hornHigh, redHops, highLowYo],//11,
+	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow]//12];
 ]
 function roll() {
 	readSettings();
@@ -199,7 +271,13 @@ function roll() {
 		}
 	} while(!goodRoll)
 	document.getElementById("dice").innerHTML = dice.displayDice;
-	funcs[dice.rollValue-2][Math.floor(Math.random()*funcs[dice.rollValue-2].length)](dice.rollValue);
+	numberFuncs = [...funcs[dice.rollValue-2]];
+	if(dice.isPointNum){
+		if(dice.isHard){
+			numberFuncs.push(hardway)
+		}
+	}
+	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
 }
 
 //function to read settings off page and apply them to the settings object
@@ -234,4 +312,8 @@ function tryAnswer(event) {
         	roll();
         }
 	}
+}
+
+function cheat(){
+	document.getElementById("cheat").innerHTML= "Answer is "+answer;
 }
