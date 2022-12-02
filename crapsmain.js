@@ -219,7 +219,7 @@ function crapcheck(roll)
 {
 	bet = randUnit(settings['caMin'], settings['caMax'], 1);
 	if(roll == 2|roll == 3| roll == 12){
-		payout = bet * 4
+		payout = bet * 7
 	}
 	setQA("Any craps for "+bet, payout);
 }
