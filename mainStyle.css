@@ -1,25 +1,44 @@
+body{
+	margin: 0;
+	padding:0;
+}
+p{
+	font-size: 4vh;
+}
+input { font-size: 3vw;
+}
+button{
+	font-size: 2vw;
+}
+.settings{
+	width: 100%
+}
 #dice {
 	text-align: center;
-	font-size: 120px;
+	font-size: 25vw;
+	padding: 0;
+	margin:0;
 }
 #settings {
+	font-size: 2vw;
 	float:left;
-	flex-basis: 100px;
-	flex-grow: 0;
-	flex-shrink: 0;
+	flex: 3;
 	height:100%;
 	background-color: #F00;
 }
 #quizpane {
-	flex: 0 0 100%;
+	flex: 5;
 	background-color: #0FF;
 }
 #mainView {
 	display: flex;
-/*	flex-direction: row;*/
+	flex-direction: row;
+	flex-wrap: nowrap;
+	align-items: stretch;
 	height: 100%;
 	width: 100%;
 	padding: 0px;
+
 }
 #quizQuestion, #cheat{
 	text-align: center;
