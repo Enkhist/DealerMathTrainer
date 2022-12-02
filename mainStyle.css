@@ -1,27 +1,35 @@
-body{
+html, body{
 	margin: 0;
 	padding:0;
+	overflow-x: hidden;
 }
 p{
-	font-size: 4vh;
+	font-size: 3em;
 }
-input { font-size: 3vw;
+input { font-size: 1em;
+}
+#answerBox{
+	font-size: 2em;
 }
 button{
-	font-size: 5vw;
+	font-size: 1em;
 }
 #dice {
 	text-align: center;
-	font-size: 30vw	;
+	font-size: 8em	;
 	padding: -10%;
 	margin:-5%;
 }
 #settings {
-	font-size: 2vw;
+	font-size: 1.5em;
 	float:left;
 	flex: 3;
 	height:100%;
 	background-color: #F00;
+}
+.flextainer{
+	margin: 0;
+	padding: 0;
 }
 #quizpane {
 	flex: 5;
@@ -34,8 +42,8 @@ button{
 	align-items: stretch;
 	height: 100%;
 	width: 100%;
-	padding: 0px;
-
+	padding: 0;
+	margin: 0;
 }
 #quizQuestion, #cheat{
 	text-align: center;

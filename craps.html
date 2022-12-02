@@ -10,7 +10,7 @@
 	
 	<body onload="initPage()">
 		<div id="mainView">
-			<div id="settings">
+			<div id="settings" class="flextainer">
 				<button onclick="roll()">Reroll</button>
 				<button onclick="cheat()">Cheat</button></br>
 				<form>
@@ -30,7 +30,7 @@
 					<label for="includeSevens">Include sevens</label><br>
 				</form>
 			</div>
-			<div id="quizpane">
+			<div id="quizpane" class="flextainer">
 				<p id="dice"></p>
 				<p id="quizQuestion">Question here.</p>
 				<input type="text" id="answerBox" onkeypress="tryAnswer(event)"></input>
