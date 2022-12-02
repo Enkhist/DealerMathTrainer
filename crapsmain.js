@@ -97,7 +97,7 @@ function ceScenario(roll){
 		payout = bet*3;
 	}
 	else if(roll==11){
-		payout = bet*12;
+		payout = bet*7;
 	}
 	setQA("C&E payout for "+bet, payout);
 }
