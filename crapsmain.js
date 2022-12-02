@@ -93,11 +93,11 @@ Views
 function ceScenario(roll){
 	//high side scenario
 	bet = randUnit(settings['caMax'], settings['caMax'], 1);
-	if(roll==2|roll==12){
-		payout = bet*7;
-	}
-	else if(roll==3|roll==11){
+	if(roll==2|roll==12|roll==3){
 		payout = bet*3;
+	}
+	else if(roll==11){
+		payout = bet*12;
 	}
 	setQA("C&E payout for "+bet, payout);
 }
