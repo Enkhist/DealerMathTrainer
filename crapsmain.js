@@ -203,8 +203,8 @@ function highLowYo(roll){
 		payout = Math.floor(bet/3)*13;
 	}
 	setQA("High Low Yo for "+bet, payout);
-	payKey = "28:1 (30:1 minus two losers to keep up) on high side,</br>"+
-			 "13:1 (15:1 minus two losers to keep up) on low side";
+	payKey = "28:3 (30:1 on 1/3 of the bet, minus two losers to keep up) on high side,</br>"+
+			 "13:3 (15:1 on 1/3 of the bet, minus two losers to keep up) on low side";
 }
 
 function highLow(roll){
@@ -215,8 +215,8 @@ function highLow(roll){
 		payout = Math.floor(bet/2)*14;
 	}
 	setQA("High Low for "+bet, payout);
-	payKey = "29:1 (30:1 minus a loser to keep up) on high side,</br>"+
-			 "14:1 (15:1 minus a loser to keep up) on low side";
+	payKey = "29:1 (30:1 on 1/2 of the bet, minus a loser to keep up) on high side,</br>"+
+			 "14:1 (15:1 on 1/2 of the bet, minus a loser to keep up) on low side";
 }
 
 //catch all function for the individual red hops
