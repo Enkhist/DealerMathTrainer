@@ -17,12 +17,12 @@ button{
 }
 #dice {
 	text-align: center;
-	font-size: 8em	;
-	padding: -10%;
-	margin:-5% 0;
+	font-size: 8em;
+	padding: -10% 0;
+	margin:-10% 0;
 }
 #settings {
-	font-size: 0.8em;
+	font-size: 0.8vw;
 	float:left;
 	flex: 1;
 	height:100%;
@@ -34,7 +34,7 @@ button{
 	height:100%;
 }
 #quizpane {
-	flex: 5;
+	flex: 3;
 	background-color: #0FF;
 }
 #mainView {
