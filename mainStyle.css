@@ -14,10 +14,18 @@ input { font-size: 1em;
 }
 .settingsInput{
 	width: 70%;
+	font-size: 2em;
+}
+.settingsCheckbox{
+	width: 2em;
+	height: 2em;
 }
 .inputButton{
-	font-size: 2em;
+	font-size: 1.2em;
 	width: 100%;
+}
+.settingsLabels{
+	font-size: 1.3em;
 }
 #dice {
 	text-align: center;
@@ -30,7 +38,7 @@ input { font-size: 1em;
 	float:left;
 	flex: 1;
 	height:100%;
-	background-color: #F00;
+	background-color: #FAA;
 }
 .flextainer{
 	margin: 0;
