@@ -115,19 +115,23 @@ function placeBet(roll){
 			payout = bet*1.8;
 		}
 		setQA("Place bet payout for "+bet, payout);
-		payKey = "9:5 or 1.8x if not bought."
+		payKey = "9:5 or 1.8x if not bought</br>"+
+		         "2:1 or 2x if bought[don't forget to ask for commission!]"
 	}
 	else if(roll == 9||roll == 5){
 		bet = randUnit(settings['pbMin'], settings['pbMax'], 5);
 		payout = Math.ceil(bet*1.4);
 		setQA("Place bet payout for "+bet, payout);
-		payKey = "7:5 or 1.4x"
+		payKey = "7:5 or 1.4x if not bought</br>"+
+		         "3:2 or 1.5x if bought [who would buy this?]"
 	}
 	else if(roll == 6||roll == 8){
 		bet = randUnit(settings['pbMin'], settings['pbMax'], 6);
 		payout = Math.floor(bet/6)*7;
 		setQA("Place bet payout for "+bet, payout);
 		payKey = "7:6"
+		payKey = "7:6 if not bought</br>"+
+		         "6:5 or 1.2 if bought [who would buy this?]"
 	}
 }
 function horn(roll){
