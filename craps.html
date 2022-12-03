@@ -12,17 +12,17 @@
 	<body onload="initPage()">
 		<div id="mainView">
 			<div id="settings" class="flextainer">
-				<button onclick="roll()">Reroll</button></br>
-				<button onclick="showKey()">Reveal key</button></br>
+				<button class="inputButton" onclick="roll()">Reroll</button></br>
+				<button class="inputButton" onclick="showKey()">Reveal key</button></br>
 				<form>
 					<label for="centermin">Center action Minimum</label></br>
-					<input class='settings' type="number" id="caMin" name="quantity" min="1" max="5"></br>
+					<input class='settings settingsInput' type="number" id="caMin" name="quantity" min="1" max="5"></br>
 					<label for="centermin">Center action Maximum</label></br>
-					<input class='settings' type="number" id="caMax" name="quantity" min="5" max="500"></br>
+					<input class='settings settingsInput' type="number" id="caMax" name="quantity" min="5" max="500"></br>
 					<label for="centermin">Place bet/Come bet Minimum</label></br>
-					<input class='settings' type="number" id="pbMin" name="quantity" min="5" max="500"></br>
+					<input class='settings settingsInput' type="number" id="pbMin" name="quantity" min="5" max="500"></br>
 					<label for="centermin">Place bet/Come bet Maximum</label></br>
-					<input class='settings' type="number" id="pbMax" name="quantity" min="6" max="500"></br>
+					<input class='settings settingsInput' type="number" id="pbMax" name="quantity" min="6" max="500"></br>
 					<input type="checkbox" id="includePoints" name="pointNums" value="pointNums">
 					<label for="includePoints">Include point numbers</label><br>
 					<input type="checkbox" id="includeCraps" name="craps" value="pointNums">
@@ -30,7 +30,7 @@
 					<input type="checkbox" id="includeSevens" name="craps" value="pointNums">
 					<label for="includeSevens">Include sevens</label><br>
 				</form>
-				<button onclick="cheat()">Cheat</button></br>
+				<button class="inputButton" onclick="cheat()">Cheat</button></br>
 			</div>
 			<div id="quizpane" class="flextainer">
 				<p id="dice"></p>

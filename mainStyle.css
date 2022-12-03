@@ -10,8 +10,12 @@ input { font-size: 1em;
 }
 #answerBox{
 	font-size: 2em;
+	width:70%;
 }
-button{
+.settingsInput{
+	width: 70%;
+}
+.inputButton{
 	font-size: 2em;
 	width: 100%;
 }
