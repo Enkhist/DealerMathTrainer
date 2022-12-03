@@ -230,8 +230,9 @@ function redHops(roll){
 		payout = bet*15;
 	}
 	setQA(reds[roll]+" for "+bet, payout);
-	payKey = "30:1 on 2/12</br>"+
-	      "15:1 on 3/11"
+	payKey = "[Keys for the red hops]</br>"+
+	         "30:1 on Craps Ace and Craps 12 bet</br>"+
+	         "15:1 on Craps Ace-Deuce and Yo bet"
 
 }
 
