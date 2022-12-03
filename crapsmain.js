@@ -290,6 +290,7 @@ function roll() {
 			}
 		}
 	} while(!goodRoll)
+	payKey = ""
 	document.getElementById("dice").innerHTML = dice.displayDice;
 	numberFuncs = [...funcs[dice.rollValue-2]];
 	if(dice.isPointNum){
