@@ -18,8 +18,8 @@ button{
 #dice {
 	text-align: center;
 	font-size: 8em;
-	padding: -10% 0;
-	margin:-10% 0;
+	padding: 0 -10%;
+	margin:-5% 0;
 }
 #settings {
 	font-size: 0.8vw;
