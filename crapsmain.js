@@ -55,6 +55,7 @@ function randUnit(min, max, unit){
 
 var question = undefined;
 var answer = undefined;
+var payKey = undefined;
 
 var settings = {
 	'caMin':1,
@@ -73,6 +74,7 @@ function setQA(q, a){
 	answer = a;
 	document.getElementById("quizQuestion").innerHTML = question;
 	document.getElementById("cheat").innerHTML="";
+	document.getElementById("key").innerHTML="";
 	
 }
 /*
@@ -100,6 +102,7 @@ function ceScenario(roll){
 		payout = bet*7;
 	}
 	setQA("C&E payout for "+bet, payout);
+	payKey = "3:1 on a craps, 7:1 on a yo"
 }
 
 function placeBet(roll){
@@ -112,16 +115,19 @@ function placeBet(roll){
 			payout = bet*1.8;
 		}
 		setQA("Place bet payout for "+bet, payout);
+		payKey = "9:5 or 1.8x if not bought."
 	}
 	else if(roll == 9||roll == 5){
 		bet = randUnit(settings['pbMin'], settings['pbMax'], 5);
 		payout = Math.ceil(bet*1.4);
 		setQA("Place bet payout for "+bet, payout);
+		payKey = "7:5 or 1.4x"
 	}
 	else if(roll == 6||roll == 8){
 		bet = randUnit(settings['pbMin'], settings['pbMax'], 6);
 		payout = Math.floor(bet/6)*7;
 		setQA("Place bet payout for "+bet, payout);
+		payKey = "7:6"
 	}
 }
 function horn(roll){
@@ -133,6 +139,8 @@ function horn(roll){
 		payout = bet*3
 	}
 	setQA("Horn payout for "+bet, payout);
+	payKey = "27:4, 6.75x, or 7x-1/4x the bet on the high side</br>"+
+	         "3x the bet on the low side."
 }
 function hornHigh(roll){
 	var highs={
@@ -159,6 +167,10 @@ function hornHigh(roll){
 		}
 	}
 	setQA("Horn High "+highs[selectedHornHigh]+" payout for "+bet, payout);
+	payKey = "[57:5 / 11.4x] high side winner</br>"+
+	         "[26:5 / 5.2x] high side loser</br>"+
+	         "[27:5 / 5.4x] low side winner</br>"+
+	         "[11:5 / 2.2x] high side loser</br>"
 }
 function hardway(roll){
 	bet = randUnit(settings['caMin'], settings['caMax'], 1);
@@ -169,12 +181,14 @@ function hardway(roll){
 		payout = bet * 7
 	}
 	setQA("Hard "+roll+" payout for "+bet, payout);
+	payKey = "9:1 on 6/8</br>"+
+	         "7:1 on 4/10"
 }
 function anyseven(roll){
 	bet = randUnit(settings['caMin'], settings['caMax'], 1);
 	payout = bet*4
 	setQA("Any seven for "+bet, payout);
-
+	payKey = "4:1"
 }
 
 function highLowYo(roll){
@@ -212,6 +226,8 @@ function redHops(roll){
 		payout = bet*15;
 	}
 	setQA(reds[roll]+" for "+bet, payout);
+	payKey = "30:1 on 2/12</br>"+
+	      "15:1 on 3/11"
 
 }
 
@@ -222,6 +238,10 @@ function crapcheck(roll)
 		payout = bet * 7
 	}
 	setQA("Any craps for "+bet, payout);
+	payKey = "7:1 on 2</br>"+
+	      "7:1 on 3</br>"+
+	      "7:1 on 11</br>"+
+	      "7:1 on 12"
 }
 
 /*
@@ -317,3 +337,6 @@ function tryAnswer(event) {
 function cheat(){
 	document.getElementById("cheat").innerHTML= "Answer is "+answer;
 }
+function showKey(){
+	document.getElementById("key").innerHTML= "Pay key:</br>"+payKey;
+}	

@@ -12,7 +12,8 @@ input { font-size: 1em;
 	font-size: 2em;
 }
 button{
-	font-size: 1em;
+	font-size: 2em;
+	width: 100%;
 }
 #dice {
 	text-align: center;
@@ -21,7 +22,7 @@ button{
 	margin:-5%;
 }
 #settings {
-	font-size: 1em;
+	font-size: 0.8em;
 	float:left;
 	flex: 1;
 	height:100%;
@@ -45,8 +46,11 @@ button{
 	padding: 0;
 	margin: 0;
 }
-#quizQuestion, #cheat{
+#quizQuestion, #cheat, #key{
 	text-align: center;
+}
+#key{
+	font-size: 2	em;
 }
 #answerBox{
 	margin: auto;

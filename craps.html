@@ -13,6 +13,7 @@
 		<div id="mainView">
 			<div id="settings" class="flextainer">
 				<button onclick="roll()">Reroll</button></br>
+				<button onclick="showKey()">Reveal key</button></br>
 				<form>
 					<label for="centermin">Center action Minimum</label></br>
 					<input class='settings' type="number" id="caMin" name="quantity" min="1" max="5"></br>
@@ -35,7 +36,8 @@
 				<p id="dice"></p>
 				<p id="quizQuestion">Question here.</p>
 				<input type="text" id="answerBox" onkeypress="tryAnswer(event)"></input>
-				<p id="cheat"></p>
+				<p id="cheat"></p></br>
+				<p id="key"></p>
 			</div>
 	</div>
 	</body>
