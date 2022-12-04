@@ -14,7 +14,7 @@ input { font-size: 1em;
 }
 .settingsInput{
 	width: 70%;
-	font-size: 1.3em;
+	font-size: 1em;
 }
 .settingsCheckbox{
 	width: 2em;
@@ -25,7 +25,7 @@ input { font-size: 1em;
 	width: 100%;
 }
 .settingsLabels{
-	font-size: 1.3em;
+	font-size: 1em;
 }
 #dice {
 	text-align: center;
