@@ -226,7 +226,7 @@ function threewaycraps(roll){
 	} else if(roll == 3){
 		payout = Math.floor(bet/3)*13;
 	}
-	setQA("High Low for "+bet, payout);
+	setQA("Three way craps for "+bet, payout);
 	payKey = "28:3, 9 1/3x (30:1 on 1/3 of the bet, minus two losers to keep up) on high side,</br>"+
 			 "13:3, 4 1/3x (15:1 on 1/3 of the bet, minus two losers to keep up) on low side";
 }
