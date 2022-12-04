@@ -203,8 +203,8 @@ function highLowYo(roll){
 		payout = Math.floor(bet/3)*13;
 	}
 	setQA("High Low Yo for "+bet, payout);
-	payKey = "28:3 (30:1 on 1/3 of the bet, minus two losers to keep up) on high side,</br>"+
-			 "13:3 (15:1 on 1/3 of the bet, minus two losers to keep up) on low side";
+	payKey = "28:3, 9 1/3x (30:1 on 1/3 of the bet, minus two losers to keep up) on high side,</br>"+
+			 "13:3, 4 1/3x (15:1 on 1/3 of the bet, minus two losers to keep up) on low side";
 }
 
 function highLow(roll){
@@ -215,8 +215,20 @@ function highLow(roll){
 		payout = Math.floor(bet/2)*14;
 	}
 	setQA("High Low for "+bet, payout);
-	payKey = "29:2 (30:1 on 1/2 of the bet, minus a loser to keep up) on high side,</br>"+
-			 "14:2 (15:1 on 1/2 of the bet, minus a loser to keep up) on low side";
+	payKey = "29:2, 14.5x (30:1 on 1/2 of the bet, minus a loser to keep up) on high side,</br>"+
+			 "14:2, 7x (15:1 on 1/2 of the bet, minus a loser to keep up) on low side";
+}
+
+function threewaycraps(roll){
+	bet = randUnit(settings['caMin'], settings['caMax'], 3);
+	if(roll == 12||roll == 2){
+		payout = Math.floor(bet/3)*28;
+	} else if(roll == 3){
+		payout = Math.floor(bet/3)*13;
+	}
+	setQA("High Low for "+bet, payout);
+	payKey = "28:3, 9 1/3x (30:1 on 1/3 of the bet, minus two losers to keep up) on high side,</br>"+
+			 "13:3, 4 1/3x (15:1 on 1/3 of the bet, minus two losers to keep up) on low side";
 }
 
 //catch all function for the individual red hops
@@ -266,8 +278,8 @@ function hops(roll)
 }
 */
 var funcs = [
-	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow],//2
-	[ceScenario, horn, hornHigh, redHops, crapcheck],//3
+	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps],//2
+	[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],//3
 	[placeBet],//4
 	[placeBet],//5
 	[placeBet],//6
@@ -276,7 +288,7 @@ var funcs = [
 	[placeBet],//9
 	[placeBet],//10
 	[ceScenario, horn, hornHigh, redHops, highLowYo],//11,
-	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow]//12];
+	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps]//12];
 ]
 function roll() {
 	readSettings();
