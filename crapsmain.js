@@ -119,8 +119,18 @@ var settings = {
 	'include9': true,
 	'include10': true,
 	'include11': true,
-	'include12': true
-	//'includes':[2,3,4,5,6,7,8,9,10,11,12]
+	'include12': true,
+	'includepb': true,
+	'includehw': true,
+	'includehorn': true,
+	'includehornhigh': true,
+	'includeredbets': true,
+	'includece': true,
+	'includeac': true,
+	'includeas': true,
+	'includehl': true,
+	'includehly': true,
+	'includetwc':true
 };
 dice = new Dice();
 
@@ -333,7 +343,7 @@ function hops(roll)
 	setQA("[this exact hop] for "+bet, payout);
 }
 */
-var funcs = [
+var funcsMenu = [
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps],//2
 	[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],//3
 	[placeBet],//4
@@ -346,9 +356,62 @@ var funcs = [
 	[ceScenario, horn, hornHigh, redHops, highLowYo],//11,
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps]//12];
 ]
+
+function functionFilter(func){
+	/*
+		'includepb': true,
+	'includehw': true,
+	'includehorn': true,
+	'includehornhigh': true,
+	'includeredbets': true,
+	'includece': true,
+	'includeac': true,
+	'includeas': true,
+	'includehl': true,
+	'includehly': true,
+	'includetwc':true*/
+	if(func.name == 'placeBet'){
+		return(settings['includepb'])
+	}
+	if(func.name == 'hardway'){
+		return(settings['includehw'])
+	}
+	if(func.name == 'horn'){
+		return(settings['includehorn'])
+	}
+	if(func.name == 'hornHigh'){
+		return(settings['includehornhigh'])
+	}
+	if(func.name == 'redHops'){
+		return(settings['includeredbets'])
+	}
+	if(func.name == 'ceScenario'){
+		return(settings['includece'])
+	}
+	if(func.name == 'crapcheck'){
+		return(settings['includeac'])
+	}
+	if(func.name == 'anyseven'){
+		return(settings['includeas'])
+	}
+	if(func.name == 'highLow'){
+		return(settings['includehl'])
+	}
+	if(func.name == 'highLowYoLowY'){
+		return(settings['includehly'])
+	}
+	if(func.name == 'threewaycraps'){
+		return(settings['includetwc'])
+	}
+
+}
 function roll() {
 	readSettings();
 	dice.roll()
+	funcs = []
+	for(rollVal in funcsMenu){
+		funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
+	}
 	payKey = ""
 	document.getElementById("dice").innerHTML = dice.displayDice;
 	numberFuncs = [...funcs[dice.rollValue-2]];
@@ -399,7 +462,6 @@ function writeLocalStorage(){
 }
 function initPage() {
 	readLocalStorage();
-	console.log(settings)
 
 	for(var item in settings){
 		if(typeof settings[item] === 'boolean'){
