@@ -12,7 +12,7 @@
 	<body onload="initPage()">
 		<div id="mainView">
 			<div id="settings" class="flextainer">
-				<button class="inputButton" onclick="roll()">Reroll</button></br>
+				<button class="inputButton" onclick="roll()">Reroll</button></br></br>
 				<button class="inputButton" onclick="showKey()">Reveal key</button></br>
 				<form>
 					<label class='settingsLabels' for="centermin">Center action Minimum</label></br>
@@ -24,6 +24,10 @@
 					<label class='settingsLabels' for="centermin">Place bet/Come bet Maximum</label></br>
 					<input class='settings settingsInput' type="number" id="pbMax" name="quantity" min="6" max="500"></br>
 					<hr>
+				</form>
+					<button class="inputButton" style="width:50%" onclick="setPoints(false)">Nats off</button><button class="inputButton" style="width:50%" onclick="setPoints(true)">Nats on</button></br>
+					<button class="inputButton" style="width:50%" onclick="setCrapYo(false)">CrapsYo off</button><button class="inputButton" style="width:50%" onclick="setCrapYo(true)">CrapsYo on</button></br>
+				<form>
 					<input class='settingsCheckbox' type="checkbox" id="include2" name="include2">
 					<label class='settingsLabels' for="include2">Include Twos</label><br>
 

@@ -107,7 +107,7 @@ var payKey = undefined;
 var settings = {
 	'caMin':1,
 	'caMax':100,
-	'pbMin':1,
+	'pbMin':5,
 	'pbMax':500,
 	'include2': true,
 	'include3': true,
@@ -481,6 +481,19 @@ function tryAnswer(event) {
         } else {
         	document.getElementById("cheat").innerHTML = "Incorrect, answer is not "+answerAttempt
         }
+	}
+}
+
+function setPoints(status){
+	var points = ["include4","include5","include6","include8","include9","include10"]
+	for(var point in points){
+		document.getElementById(points[point]).checked = status;
+	}
+}
+function setCrapYo(status){
+	var points = ["include2","include3","include11","include12"]
+	for(var point in points){
+		document.getElementById(points[point]).checked = status;
 	}
 }
 
