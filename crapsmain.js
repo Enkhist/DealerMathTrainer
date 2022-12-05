@@ -114,7 +114,7 @@ var settings = {
 	'include4': true,
 	'include5': true,
 	'include6': true,
-	'include7': true,
+	'include7': false,
 	'include8': true,
 	'include9': true,
 	'include10': true,
