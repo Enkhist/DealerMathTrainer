@@ -4,11 +4,58 @@ class Dice{
 		this.die2 = undefined;
 		this.dieFaces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 		this.pointNums = [4,5,6,8,9,10]
-		this.roll()
+		this.setNums = [true, true, true, true, true, true, true, true, true, true, true, true]
+		this.alloutcomes = [ [ [1,1] ],                                  //2
+			               [ [1,2], [2,1] ],                             //3
+			               [ [1,3], [2,2], [3,1] ],                      //4
+		                   [ [1,4], [2,3], [3,2], [4,1] ],               //5
+		                   [ [1,5], [2,4], [3,3], [4,2], [5,1] ],        //6
+		                   [ [1,6], [2,5], [3,4], [4,3], [5,2], [6,1] ], //7
+		                   [ [2,6], [3,5], [4,4], [5,3], [6,2] ],        //8
+		                   [ [3,6], [4,5], [5,4], [6,3] ],               //9
+		                   [ [4,6], [5,5], [4,6] ],                      //10
+		                   [ [5,6], [6,5] ],                             //11
+		                   [ [6,6] ] ]                                   //12
+		this.selectedOutcomes = undefined
 	}
 	roll(){
-		this.die1 = Math.floor(Math.random()*6)+1;
-		this.die2 = Math.floor(Math.random()*6)+1;
+		this.selectedOutcomes = []
+		if(settings['include2']){
+			this.selectedOutcomes.push(...this.alloutcomes[0]);
+		}
+		if(settings['include3']){
+			this.selectedOutcomes.push(...this.alloutcomes[1]);
+		}
+		if(settings['include4']){
+			this.selectedOutcomes.push(...this.alloutcomes[2]);
+		}
+		if(settings['include5']){
+			this.selectedOutcomes.push(...this.alloutcomes[3]);
+		}
+		if(settings['include6']){
+			this.selectedOutcomes.push(...this.alloutcomes[4]);
+		}
+		if(settings['include7']){
+			this.selectedOutcomes.push(...this.alloutcomes[5]);
+		}
+		if(settings['include8']){
+			this.selectedOutcomes.push(...this.alloutcomes[6]);
+		}
+		if(settings['include9']){
+			this.selectedOutcomes.push(...this.alloutcomes[7]);
+		}
+		if(settings['include10']){
+			this.selectedOutcomes.push(...this.alloutcomes[8]);
+		}
+		if(settings['include11']){
+			this.selectedOutcomes.push(...this.alloutcomes[9]);
+		}
+		if(settings['include12']){
+			this.selectedOutcomes.push(...this.alloutcomes[10]);
+		}
+		var localRoll = this.selectedOutcomes[Math.floor(Math.random()*this.selectedOutcomes.length)];
+		this.die1 = localRoll[0];
+		this.die2 = localRoll[1];
 	}
 	get displayDice(){
 		return this.dieFaces[this.die1-1] + this.dieFaces[this.die2-1];
@@ -62,9 +109,18 @@ var settings = {
 	'caMax':100,
 	'pbMin':1,
 	'pbMax':500,
-	'includeCraps':true,
-	'includePoints':true,
-	'includeSevens':false
+	'include2': true,
+	'include3': true,
+	'include4': true,
+	'include5': true,
+	'include6': true,
+	'include7': true,
+	'include8': true,
+	'include9': true,
+	'include10': true,
+	'include11': true,
+	'include12': true
+	//'includes':[2,3,4,5,6,7,8,9,10,11,12]
 };
 dice = new Dice();
 
@@ -292,25 +348,7 @@ var funcs = [
 ]
 function roll() {
 	readSettings();
-	do{
-		var goodRoll = true;
-		dice.roll();
-		if(!settings['includePoints']){
-			if(dice.isPointNum){
-				goodRoll = false
-			}
-		}
-		if(!settings['includeCraps']){
-			if(dice.isCraps){
-				goodRoll = false
-			}
-		}
-		if(!settings['includeSevens']){
-			if(dice.rollValue == 7){
-				goodRoll = false
-			}
-		}
-	} while(!goodRoll)
+	dice.roll()
 	payKey = ""
 	document.getElementById("dice").innerHTML = dice.displayDice;
 	numberFuncs = [...funcs[dice.rollValue-2]];
@@ -320,6 +358,7 @@ function roll() {
 		}
 	}
 	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
+	writeLocalStorage();
 }
 
 //function to read settings off page and apply them to the settings object
@@ -331,9 +370,37 @@ function readSettings(){
 			settings[item] = document.getElementById(item).value;
 		}
 	}
+}
 
+//load settings from localstorage
+function readLocalStorage(){
+	for (var setting in settings){
+		attempt = localStorage.getItem(setting);
+		if(attempt !== null){
+			if(attempt == "true"){
+				settings[setting] = true;
+			}
+			else if(attempt == "false"){
+				settings[setting] = false;
+			}
+			else{
+				settings[setting] = attempt
+			}
+		}
+	}
+}
+
+//write settings to localstorage
+function writeLocalStorage(){
+	for (var setting in settings){
+		localStorage.setItem(setting, settings[setting]);
+
+	}
 }
 function initPage() {
+	readLocalStorage();
+	console.log(settings)
+
 	for(var item in settings){
 		if(typeof settings[item] === 'boolean'){
 			document.getElementById(item).checked = settings[item];
