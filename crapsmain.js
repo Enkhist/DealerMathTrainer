@@ -407,6 +407,7 @@ function functionFilter(func){
 function roll() {
 	readSettings();
 	dice.roll()
+
 	funcs = []
 	for(rollVal in funcsMenu){
 		funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
@@ -476,10 +477,12 @@ function initPage() {
 function tryAnswer(event) {
     if (event.keyCode == 13) {
         answerAttempt = document.getElementById('answerBox').value;
+        document.getElementById('answerBox').value = '';
         if(answer == answerAttempt){
-        	alert("correct!");
-        	document.getElementById('answerBox').value = '';
-        	roll();
+        	document.getElementById("cheat").innerHTML= "Correct! Answer is "+answerAttempt
+        	setTimeout(roll, 1750)
+        } else {
+        	document.getElementById("cheat").innerHTML = "Incorrect, answer is not "+answerAttempt
         }
 	}
 }
