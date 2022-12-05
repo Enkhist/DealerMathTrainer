@@ -327,7 +327,6 @@ function crapcheck(roll)
 	setQA("Any craps for "+bet, payout);
 	payKey = "7:1 on 2</br>"+
 	      "7:1 on 3</br>"+
-	      "7:1 on 11</br>"+
 	      "7:1 on 12"
 }
 
