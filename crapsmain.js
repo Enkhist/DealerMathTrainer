@@ -416,7 +416,7 @@ function roll() {
 	document.getElementById("dice").innerHTML = dice.displayDice;
 	numberFuncs = [...funcs[dice.rollValue-2]];
 	if(dice.isPointNum){
-		if(dice.isHard){
+		if(dice.isHard & settings['includehw']){
 			numberFuncs.push(hardway)
 		}
 	}
