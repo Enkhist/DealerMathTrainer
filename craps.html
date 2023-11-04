@@ -15,18 +15,18 @@
 				<button class="inputButton" onclick="roll()">Reroll</button></br></br>
 				<button class="inputButton" onclick="showKey()">Reveal key</button></br>
 				<form>
-					<label class='settingsLabels' for="centermin">Center action Minimum</label></br>
+					<label class='settingsLabels' for="caMin">Center action Minimum</label></br>
 					<input class='settings settingsInput' type="number" id="caMin" name="quantity" min="1" max="5"></br>
-					<label class='settingsLabels' for="centermin">Center action Maximum</label></br>
+					<label class='settingsLabels' for="caMax">Center action Maximum</label></br>
 					<input class='settings settingsInput' type="number" id="caMax" name="quantity" min="5" max="500"></br>
-					<label class='settingsLabels' for="centermin">Place bet/Come bet Minimum</label></br>
+					<label class='settingsLabels' for="pbMin">Place bet/Come bet Minimum</label></br>
 					<input class='settings settingsInput' type="number" id="pbMin" name="quantity" min="5" max="500"></br>
-					<label class='settingsLabels' for="centermin">Place bet/Come bet Maximum</label></br>
+					<label class='settingsLabels' for="pbMax">Place bet/Come bet Maximum</label></br>
 					<input class='settings settingsInput' type="number" id="pbMax" name="quantity" min="6" max="500"></br>
 					<hr>
 				</form>
-					<button class="inputButton" style="width:50%" onclick="setPoints(false)">Nats off</button><button class="inputButton" style="width:50%" onclick="setPoints(true)">Nats on</button></br>
-					<button class="inputButton" style="width:50%" onclick="setCrapYo(false)">C&E off</button><button class="inputButton" style="width:50%" onclick="setCrapYo(true)">C&E on</button></br>
+					<button class="inputButton" style="width:50%" onclick="setPoints(false)">Point Nums Off</button><button class="inputButton" style="width:50%" onclick="setPoints(true)">Point Nums On</button></br>
+					<button class="inputButton" style="width:50%" onclick="setCrapYo(false)">C&E Off</button><button class="inputButton" style="width:50%" onclick="setCrapYo(true)">C&E On</button></br>
 				<form>
 					<input class='settingsCheckbox' type="checkbox" id="include2" name="include2">
 					<label class='settingsLabels' for="include2">Include Twos</label><br>
@@ -63,38 +63,38 @@
 
 					<hr>
 
-					<input class='settingsCheckbox' type="checkbox" id="includepb" name="include12">
-					<label class='settingsLabels' for="include12">Include Place bets [autobuy 4/10 @$20]</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includepb" name="includepb">
+					<label class='settingsLabels' for="includepb">Include Place bets [autobuy 4/10 @$20]</label><br>
 
-					<input class='settingsCheckbox' type="checkbox" id="includehw" name="include12">
-					<label class='settingsLabels' for="include12">Include hard ways</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includehw" name="includehw">
+					<label class='settingsLabels' for="includehw">Include hard ways</label><br>
 
-					<input class='settingsCheckbox' type="checkbox" id="includehorn" name="include12">
-					<label class='settingsLabels' for="include12">Include Horn bet</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includehorn" name="includehorn">
+					<label class='settingsLabels' for="includehorn">Include Horn bet</label><br>
 
-					<input class='settingsCheckbox' type="checkbox" id="includehornhigh" name="include12">
-					<label class='settingsLabels' for="include12">Include Horn Highs</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includehornhigh" name="includehornhigh">
+					<label class='settingsLabels' for="includehornhigh">Include Horn Highs</label><br>
 
-					<input class='settingsCheckbox' type="checkbox" id="includeredbets" name="include12">
-					<label class='settingsLabels' for="include12">Include Two Craps, Twelve Craps, Three Craps, Yo</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includeredbets" name="includeredbets">
+					<label class='settingsLabels' for="includeredbets">Include Two Craps, Twelve Craps, Three Craps, Yo</label><br>
 
-					<input class='settingsCheckbox' type="checkbox" id="includece" name="include12">
-					<label class='settingsLabels' for="include12">Include C&E</label><br>
+					<input class='settingsCheckbox' type="checkbox" id="includece" name="includece">
+					<label class='settingsLabels' for="includece">Include C&E</label><br>
 
 					<input class='settingsCheckbox' type="checkbox" id="includeac" name="includeac">
-					<label class='settingsLabels' for="include12">Include Any Craps</label><br>
+					<label class='settingsLabels' for="includeac">Include Any Craps</label><br>
 
 					<input class='settingsCheckbox' type="checkbox" id="includeas" name="includeas">
-					<label class='settingsLabels' for="include12">Include Any Seven</label><br>
+					<label class='settingsLabels' for="includeas">Include Any Seven</label><br>
 
 					<input class='settingsCheckbox' type="checkbox" id="includehl" name="includehl">
-					<label class='settingsLabels' for="include12">Include High Low</label><br>
+					<label class='settingsLabels' for="includehl">Include High Low</label><br>
 
 					<input class='settingsCheckbox' type="checkbox" id="includehly" name="includehly">
-					<label class='settingsLabels' for="include12">Include High Low Yo</label><br>
+					<label class='settingsLabels' for="includehly">Include High Low Yo</label><br>
 
 					<input class='settingsCheckbox' type="checkbox" id="includetwc" name="includetwc">
-					<label class='settingsLabels' for="include12">Include Three Way Craps</label><br>
+					<label class='settingsLabels' for="includetwc">Include Three Way Craps</label><br>
 
 				</form>
 				<button class="inputButton" onclick="cheat()">Cheat</button></br>
