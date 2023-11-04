@@ -403,20 +403,22 @@ function functionFilter(func){
 }
 function roll() {
 	readSettings();
-	dice.roll()
+	do{
+		dice.roll()
 
-	funcs = []
-	for(rollVal in funcsMenu){
-		funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
-	}
-	payKey = ""
-	document.getElementById("dice").innerHTML = dice.displayDice;
-	numberFuncs = [...funcs[dice.rollValue-2]];
-	if(dice.isPointNum){
-		if(dice.isHard & settings['includehw']){
-			numberFuncs.push(hardway)
+		funcs = []
+		for(rollVal in funcsMenu){
+			funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
 		}
-	}
+		payKey = ""
+		numberFuncs = [...funcs[dice.rollValue-2]];
+		if(dice.isPointNum){
+			if(dice.isHard & settings['includehw']){
+				numberFuncs.push(hardway)
+			}
+		}
+	} while(numberFuncs.length == 0);
+	document.getElementById("dice").innerHTML = dice.displayDice;
 	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
 	writeLocalStorage();
 }
