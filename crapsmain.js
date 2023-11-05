@@ -20,38 +20,101 @@ class Dice{
 	}
 	roll(){
 		this.selectedOutcomes = []
-		if(settings['include2']){
-			this.selectedOutcomes.push(...this.alloutcomes[0]);
+		if(settings['include2']){//2
+			if(settings['includehorn']||settings['includehornhigh']||settings['includehl']||settings['includehly']||settings['includece']){
+				this.selectedOutcomes.push(this.alloutcomes[0][0]);
+			}
 		}
-		if(settings['include3']){
-			this.selectedOutcomes.push(...this.alloutcomes[1]);
+		if(settings['include3']){//3
+			if(settings['includehorn']||settings['includehornhigh']||settings['includece']){
+				this.selectedOutcomes.push(this.alloutcomes[1][0]);
+				this.selectedOutcomes.push(this.alloutcomes[1][1]);
+			}
 		}
-		if(settings['include4']){
-			this.selectedOutcomes.push(...this.alloutcomes[2]);
+		if(settings['include4']){//4
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[2][0]);
+				this.selectedOutcomes.push(this.alloutcomes[2][2]);
+				this.selectedOutcomes.push(this.alloutcomes[2][1]);
+			}
+			else if(settings['includehw']){
+				this.selectedOutcomes.push(this.alloutcomes[2][1]);
+			}
 		}
-		if(settings['include5']){
-			this.selectedOutcomes.push(...this.alloutcomes[3]);
+		if(settings['include5']){//5
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[3][0]);
+				this.selectedOutcomes.push(this.alloutcomes[3][1]);
+				this.selectedOutcomes.push(this.alloutcomes[3][2]);
+				this.selectedOutcomes.push(this.alloutcomes[3][3]);
+
+			}
 		}
-		if(settings['include6']){
-			this.selectedOutcomes.push(...this.alloutcomes[4]);
+		if(settings['include6']){///6
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[4][0]);
+				this.selectedOutcomes.push(this.alloutcomes[4][1]);
+				this.selectedOutcomes.push(this.alloutcomes[4][2]);
+				this.selectedOutcomes.push(this.alloutcomes[4][3]);
+				this.selectedOutcomes.push(this.alloutcomes[4][4]);
+			}
+			else if(settings['includehw']){
+				this.selectedOutcomes.push(this.alloutcomes[4][2]);
+			}
 		}
-		if(settings['include7']){
-			this.selectedOutcomes.push(...this.alloutcomes[5]);
+		if(settings['include7']){//7
+			if(settings['includeas']){
+				this.selectedOutcomes.push(this.alloutcomes[5][1]);
+				this.selectedOutcomes.push(this.alloutcomes[5][2]);
+				this.selectedOutcomes.push(this.alloutcomes[5][3]);
+				this.selectedOutcomes.push(this.alloutcomes[5][4]);
+				this.selectedOutcomes.push(this.alloutcomes[5][5]);
+				this.selectedOutcomes.push(this.alloutcomes[5][6]);
+			}
 		}
-		if(settings['include8']){
-			this.selectedOutcomes.push(...this.alloutcomes[6]);
+		if(settings['include8']){//8
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[6][0]);
+				this.selectedOutcomes.push(this.alloutcomes[6][1]);
+				this.selectedOutcomes.push(this.alloutcomes[6][2]);
+				this.selectedOutcomes.push(this.alloutcomes[6][3]);
+				this.selectedOutcomes.push(this.alloutcomes[6][4]);
+			}
+			else if(settings['includehw']){
+				this.selectedOutcomes.push(this.alloutcomes[6][2]);
+			}
 		}
-		if(settings['include9']){
-			this.selectedOutcomes.push(...this.alloutcomes[7]);
+		if(settings['include9']){//9
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[7][0]);
+				this.selectedOutcomes.push(this.alloutcomes[7][1]);
+				this.selectedOutcomes.push(this.alloutcomes[7][2]);
+				this.selectedOutcomes.push(this.alloutcomes[7][3]);
+			}
 		}
-		if(settings['include10']){
-			this.selectedOutcomes.push(...this.alloutcomes[8]);
+		if(settings['include10']){//10
+			if(settings['includepb']){
+				this.selectedOutcomes.push(this.alloutcomes[8][0]);
+				this.selectedOutcomes.push(this.alloutcomes[8][1]);
+				this.selectedOutcomes.push(this.alloutcomes[8][2]);
+			}
+			else if(settings['includehw']){
+				this.selectedOutcomes.push(this.alloutcomes[8][1]);
+			}
 		}
-		if(settings['include11']){
-			this.selectedOutcomes.push(...this.alloutcomes[9]);
+		if(settings['include11']){//11
+			if(settings['includehorn']||settings['includehornhigh']||settings['includehly']||settings['includece']){
+				this.selectedOutcomes.push(this.alloutcomes[9][0]);
+				this.selectedOutcomes.push(this.alloutcomes[9][1]);
+			}
 		}
-		if(settings['include12']){
-			this.selectedOutcomes.push(...this.alloutcomes[10]);
+		if(settings['include12']){//12
+			if(settings['includehorn']||settings['includehornhigh']||settings['includehl']||settings['includehly']||settings['includece']){
+				this.selectedOutcomes.push(this.alloutcomes[10]);
+			}
+		}
+		if(this.selectedOutcomes.length == 0){
+			alert("Impossible selection. Please re-evaluate selections.")
 		}
 		var localRoll = this.selectedOutcomes[Math.floor(Math.random()*this.selectedOutcomes.length)];
 		this.die1 = localRoll[0];
@@ -342,13 +405,13 @@ function hops(roll)
 var funcsMenu = [
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps],//2
 	[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],//3
-	[placeBet],//4
+	[placeBet, hardway],//4
 	[placeBet],//5
-	[placeBet],//6
+	[placeBet, hardway],//6
 	[anyseven],//7
-	[placeBet],//8
+	[placeBet, hardway],//8
 	[placeBet],//9
-	[placeBet],//10
+	[placeBet, hardway],//10
 	[ceScenario, horn, hornHigh, redHops, highLowYo],//11,
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps]//12];
 ]
@@ -403,22 +466,19 @@ function functionFilter(func){
 }
 function roll() {
 	readSettings();
-	do{
-		dice.roll()
-
-		funcs = []
-		for(rollVal in funcsMenu){
-			funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
-		}
-		payKey = ""
-		numberFuncs = [...funcs[dice.rollValue-2]];
-		if(dice.isPointNum){
-			if(dice.isHard & settings['includehw']){
-				numberFuncs.push(hardway)
-			}
-		}
-	} while(numberFuncs.length == 0);
+	dice.roll()
 	document.getElementById("dice").innerHTML = dice.displayDice;
+	funcs = []
+	for(rollVal in funcsMenu){
+		funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
+	}
+	payKey = ""
+	numberFuncs = [...funcs[dice.rollValue-2]];
+	//if(dice.isPointNum){
+	//	if(dice.isHard & settings['includehw']){
+	//		numberFuncs.push(hardway)
+	//	}
+	//}
 	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
 	writeLocalStorage();
 }
