@@ -405,13 +405,13 @@ function hops(roll)
 var funcsMenu = [
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps],//2
 	[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],//3
-	[placeBet, hardway],//4
+	[placeBet],//4
 	[placeBet],//5
-	[placeBet, hardway],//6
+	[placeBet],//6
 	[anyseven],//7
-	[placeBet, hardway],//8
+	[placeBet],//8
 	[placeBet],//9
-	[placeBet, hardway],//10
+	[placeBet],//10
 	[ceScenario, horn, hornHigh, redHops, highLowYo],//11,
 	[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps]//12];
 ]
@@ -474,11 +474,11 @@ function roll() {
 	}
 	payKey = ""
 	numberFuncs = [...funcs[dice.rollValue-2]];
-	//if(dice.isPointNum){
-	//	if(dice.isHard & settings['includehw']){
-	//		numberFuncs.push(hardway)
-	//	}
-	//}
+	if(dice.isPointNum){
+		if(dice.isHard & settings['includehw']){
+			numberFuncs.push(hardway)
+		}
+	}
 	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
 	writeLocalStorage();
 }
