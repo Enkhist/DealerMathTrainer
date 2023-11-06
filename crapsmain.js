@@ -178,7 +178,6 @@ class Dice{
 				}
 			}
 		}
-		console.log(this.selectedOutcomes);
 	}
 	roll(){
 		var keys = Object.keys(this.selectedOutcomes);
