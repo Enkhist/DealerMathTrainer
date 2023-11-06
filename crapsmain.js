@@ -5,120 +5,186 @@ class Dice{
 		this.dieFaces = ["⚀","⚁","⚂","⚃","⚄","⚅"]
 		this.pointNums = [4,5,6,8,9,10]
 		this.setNums = [true, true, true, true, true, true, true, true, true, true, true, true]
-		this.alloutcomes = [ [ [1,1] ],                                  //2
-			               [ [1,2], [2,1] ],                             //3
-			               [ [1,3], [2,2], [3,1] ],                      //4
-		                   [ [1,4], [2,3], [3,2], [4,1] ],               //5
-		                   [ [1,5], [2,4], [3,3], [4,2], [5,1] ],        //6
-		                   [ [1,6], [2,5], [3,4], [4,3], [5,2], [6,1] ], //7
-		                   [ [2,6], [3,5], [4,4], [5,3], [6,2] ],        //8
-		                   [ [3,6], [4,5], [5,4], [6,3] ],               //9
-		                   [ [4,6], [5,5], [4,6] ],                      //10
-		                   [ [5,6], [6,5] ],                             //11
-		                   [ [6,6] ] ]                                   //12
+		this.alloutcomes = {
+			                 //2
+		                     11:[ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps],
+		                     //3
+			                 12:[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],
+			                 21:[ceScenario, horn, hornHigh, redHops, crapcheck, threewaycraps],
+			                 //easy 4
+			                 13:[placeBet],
+			                 31:[placeBet],
+			                 //hard 4
+			                 22:[placeBet, hardway],
+			                 //5
+		                     14:[placeBet],
+		                     41:[placeBet],
+		                     23:[placeBet],
+		                     32:[placeBet],
+		                     //easy 6
+		                     15:[placeBet],
+		                     51:[placeBet],
+		                     24:[placeBet],
+		                     42:[placeBet],
+		                     //hard 6
+		                     33:[placeBet, hardway],
+		                     //7     
+		                     16:[anyseven],
+		                     61:[anyseven],
+		                     25:[anyseven],
+		                     52:[anyseven],
+		                     34:[anyseven],
+		                     43:[anyseven],
+		                     //easy 8
+		                     26:[placeBet],
+		                     62:[placeBet],
+		                     35:[placeBet],
+		                     53:[placeBet],
+		                     //hard 8
+		                     44:[placeBet, hardway],
+		                     //9
+		                     36:[placeBet],
+		                     63:[placeBet],
+		                     45:[placeBet],
+		                     54:[placeBet],
+		                     //easy 10
+		                     46:[placeBet],
+		                     64:[placeBet],
+		                     //hard 10
+		                     55:[placeBet, hardway],
+		                     //11
+		                     56:[ceScenario, horn, hornHigh, redHops, highLowYo],
+		                     65:[ceScenario, horn, hornHigh, redHops, highLowYo],
+		                     //12
+		                     66: [ceScenario, horn, hornHigh, redHops, crapcheck, highLowYo, highLow, threewaycraps]
+		               }
 		this.selectedOutcomes = undefined
+		this.currentRoll = undefined
+	}
+	createSelectedOutcomes(){
+		this.selectedOutcomes = {}
+		for(let i=0; i < Object.keys(this.alloutcomes).length; i++){
+			var key = Object.keys(this.alloutcomes)[i];
+			var rollVal = parseInt(key.toString()[0])+parseInt(key.toString()[1]);
+			//skip numbers that we have opted out of
+			switch(rollVal){
+				case 2:
+					if(!settings['include2']){
+						continue;
+					}
+						break;
+				case 3:
+					if(!settings['include3']){
+						continue;
+					}
+					break;
+				case 4:
+					if(!settings['include4']){
+						continue;
+					}
+					break;
+				case 5:
+					if(!settings['include5']){
+						continue;
+					}
+					break;
+				case 6:
+					if(!settings['include6']){
+						continue;
+					}
+					break;
+				case 7:
+					if(!settings['include7']){
+						continue;
+					}
+					break;
+				case 8:
+					if(!settings['include8']){
+						continue;
+					}
+					break;
+				case 9:
+					if(!settings['include9']){
+						continue;
+					}
+					break;
+				case 10:
+					if(!settings['include10']){
+						continue;
+					}
+					break;
+				case 11:
+					if(!settings['include11']){
+						continue;
+					}
+					break;
+				case 12:
+					if(!settings['include12']){
+						continue;
+					}
+					break;
+			}
+			//having skipped numbers we don't want, iterate functions on the numbers we do want and skip
+			//the functions we do *not* want
+			for(let j=0; j < this.alloutcomes[key].length; j++){
+				switch(this.alloutcomes[key][j].name){
+					case 'placeBet':
+						if(!settings['includepb']){
+							continue;
+						}
+						break;
+					case 'hardway':
+						if(!settings['includehw']){
+							continue;
+						}
+						break;
+					case 'horn':
+						if(!settings['includehorn']){
+							continue;
+						}
+						break;
+					case 'hornHigh':
+						if(!settings['includehornhigh']){
+							continue;
+						}
+						break;
+					case 'highLow':
+						if(!settings['includepb']){
+							continue;
+						}
+						break;
+					case 'highLowYo':
+						if(!settings['includepb']){
+							continue;
+						}
+						break;
+					case 'crapcheck':
+						if(!settings['includece']){
+							continue;
+						}
+						break;
+					case 'anyseven':
+						if(!settings['includeas']){
+							continue;
+						}
+						break;
+					}
+				//we skipped the numbers we don't want and the functions we don't want. Add whatever is left.
+				if(key in this.selectedOutcomes){
+					this.selectedOutcomes[key].push(this.alloutcomes[key][j]);
+				}
+				else{
+					this.selectedOutcomes[key]=[this.alloutcomes[key][j]];
+				}
+			}
+		}
+		console.log(this.selectedOutcomes);
 	}
 	roll(){
-		this.selectedOutcomes = []
-		if(settings['include2']){//2
-			if(settings['includehorn']||settings['includehornhigh']||settings['includehl']||settings['includehly']||settings['includece']){
-				this.selectedOutcomes.push(this.alloutcomes[0][0]);
-			}
-		}
-		if(settings['include3']){//3
-			if(settings['includehorn']||settings['includehornhigh']||settings['includece']){
-				this.selectedOutcomes.push(this.alloutcomes[1][0]);
-				this.selectedOutcomes.push(this.alloutcomes[1][1]);
-			}
-		}
-		if(settings['include4']){//4
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[2][0]);
-				this.selectedOutcomes.push(this.alloutcomes[2][2]);
-				this.selectedOutcomes.push(this.alloutcomes[2][1]);
-			}
-			else if(settings['includehw']){
-				this.selectedOutcomes.push(this.alloutcomes[2][1]);
-			}
-		}
-		if(settings['include5']){//5
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[3][0]);
-				this.selectedOutcomes.push(this.alloutcomes[3][1]);
-				this.selectedOutcomes.push(this.alloutcomes[3][2]);
-				this.selectedOutcomes.push(this.alloutcomes[3][3]);
-
-			}
-		}
-		if(settings['include6']){///6
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[4][0]);
-				this.selectedOutcomes.push(this.alloutcomes[4][1]);
-				this.selectedOutcomes.push(this.alloutcomes[4][2]);
-				this.selectedOutcomes.push(this.alloutcomes[4][3]);
-				this.selectedOutcomes.push(this.alloutcomes[4][4]);
-			}
-			else if(settings['includehw']){
-				this.selectedOutcomes.push(this.alloutcomes[4][2]);
-			}
-		}
-		if(settings['include7']){//7
-			if(settings['includeas']){
-				this.selectedOutcomes.push(this.alloutcomes[5][1]);
-				this.selectedOutcomes.push(this.alloutcomes[5][2]);
-				this.selectedOutcomes.push(this.alloutcomes[5][3]);
-				this.selectedOutcomes.push(this.alloutcomes[5][4]);
-				this.selectedOutcomes.push(this.alloutcomes[5][5]);
-				this.selectedOutcomes.push(this.alloutcomes[5][6]);
-			}
-		}
-		if(settings['include8']){//8
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[6][0]);
-				this.selectedOutcomes.push(this.alloutcomes[6][1]);
-				this.selectedOutcomes.push(this.alloutcomes[6][2]);
-				this.selectedOutcomes.push(this.alloutcomes[6][3]);
-				this.selectedOutcomes.push(this.alloutcomes[6][4]);
-			}
-			else if(settings['includehw']){
-				this.selectedOutcomes.push(this.alloutcomes[6][2]);
-			}
-		}
-		if(settings['include9']){//9
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[7][0]);
-				this.selectedOutcomes.push(this.alloutcomes[7][1]);
-				this.selectedOutcomes.push(this.alloutcomes[7][2]);
-				this.selectedOutcomes.push(this.alloutcomes[7][3]);
-			}
-		}
-		if(settings['include10']){//10
-			if(settings['includepb']){
-				this.selectedOutcomes.push(this.alloutcomes[8][0]);
-				this.selectedOutcomes.push(this.alloutcomes[8][1]);
-				this.selectedOutcomes.push(this.alloutcomes[8][2]);
-			}
-			else if(settings['includehw']){
-				this.selectedOutcomes.push(this.alloutcomes[8][1]);
-			}
-		}
-		if(settings['include11']){//11
-			if(settings['includehorn']||settings['includehornhigh']||settings['includehly']||settings['includece']){
-				this.selectedOutcomes.push(this.alloutcomes[9][0]);
-				this.selectedOutcomes.push(this.alloutcomes[9][1]);
-			}
-		}
-		if(settings['include12']){//12
-			if(settings['includehorn']||settings['includehornhigh']||settings['includehl']||settings['includehly']||settings['includece']){
-				this.selectedOutcomes.push(this.alloutcomes[10]);
-			}
-		}
-		if(this.selectedOutcomes.length == 0){
-			alert("Impossible selection. Please re-evaluate selections.")
-		}
-		var localRoll = this.selectedOutcomes[Math.floor(Math.random()*this.selectedOutcomes.length)];
-		this.die1 = localRoll[0];
-		this.die2 = localRoll[1];
+		var keys = Object.keys(this.selectedOutcomes);
+		this.currentRoll = keys[keys.length * Math.random() << 0];
+		this.die1 = parseInt(this.currentRoll.toString()[0]);
+		this.die2 = parseInt(this.currentRoll.toString()[1]);
 	}
 	get displayDice(){
 		return this.dieFaces[this.die1-1] + this.dieFaces[this.die2-1];
@@ -456,7 +522,7 @@ function functionFilter(func){
 	if(func.name == 'highLow'){
 		return(settings['includehl'])
 	}
-	if(func.name == 'highLowYoLowY'){
+	if(func.name == 'highLowYo'){
 		return(settings['includehly'])
 	}
 	if(func.name == 'threewaycraps'){
@@ -466,31 +532,32 @@ function functionFilter(func){
 }
 function roll() {
 	readSettings();
-	dice.roll()
+	if(Object.keys(dice.selectedOutcomes).length == 0){
+		alert("Impossible settings! no possible rolls to fulfill them.")
+		return;
+	}
+	dice.roll();
 	document.getElementById("dice").innerHTML = dice.displayDice;
-	funcs = []
-	for(rollVal in funcsMenu){
-		funcs[rollVal] = funcsMenu[rollVal].filter(functionFilter)
-	}
-	payKey = ""
-	numberFuncs = [...funcs[dice.rollValue-2]];
-	if(dice.isPointNum){
-		if(dice.isHard & settings['includehw']){
-			numberFuncs.push(hardway)
-		}
-	}
-	numberFuncs[Math.floor(Math.random()*numberFuncs.length)](dice.rollValue);
+	funcList = dice.selectedOutcomes[dice.currentRoll]
+	funcList[Math.floor(Math.random()*funcList.length)](dice.rollValue);
 	writeLocalStorage();
 }
 
 //function to read settings off page and apply them to the settings object
 function readSettings(){
+	var updateRequired = false;
 	for(var item in settings){
 		if(typeof settings[item] === 'boolean'){
+			if(settings[item] != document.getElementById(item).checked){
+				updateRequired = true;
+			}
 			settings[item] = document.getElementById(item).checked;
 		} else {
 			settings[item] = document.getElementById(item).value;
 		}
+	}
+	if(updateRequired){
+		dice.createSelectedOutcomes();
 	}
 }
 
@@ -530,6 +597,7 @@ function initPage() {
 		}
 	}
 	dice = new Dice();
+	dice.createSelectedOutcomes();
 	roll();
 }
 
